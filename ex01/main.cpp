@@ -72,41 +72,41 @@ class PhoneBook
 	void addContact(const std::string &first, const std::string &last,
 		const std::string &nicknm, const std::string &phone)
 	{
-		if(contactCount == 0)
+		if (contactCount == 0)
 		{
 			contacts[0].setDetails(first, last, nicknm, phone);
 			contactCount++;
 			oldestContactIndex++;
 		}
-		else if(contactCount > 0 && contactCount < MAX_CONTACTS)
+		else if (contactCount > 0 && contactCount < MAX_CONTACTS)
 		{
 			for (int i = contactCount; i > 0; i--)
 			{
 				contacts[i].setDetails(
-				contacts[i - 1].getFirstName(),
-				contacts[i - 1].getLastName(), 
-				contacts[i - 1].getNickName(), 
-				contacts[i - 1].getPhoneNumber()
+					contacts[i - 1].getFirstName(),
+					contacts[i - 1].getLastName(), 
+					contacts[i - 1].getNickName(), 
+					contacts[i - 1].getPhoneNumber()
 				);
 			}
+
 			contacts[0].setDetails(first, last, nicknm, phone);
 			contactCount++;
-			oldestContactIndex++;
-		}else if(contactCount >= MAX_CONTACTS)
+		}
+		else if (contactCount >= MAX_CONTACTS)
 		{
-			// std::cout << "GELAAAAAAAA\n";
 			for (int i = MAX_CONTACTS - 1; i > 0; i--)
 			{
 				contacts[i].setDetails(
-				contacts[i - 1].getFirstName(),
-				contacts[i - 1].getLastName(), 
-				contacts[i - 1].getNickName(), 
-				contacts[i - 1].getPhoneNumber()
+					contacts[i - 1].getFirstName(),
+					contacts[i - 1].getLastName(), 
+					contacts[i - 1].getNickName(),
+					contacts[i - 1].getPhoneNumber()
 				);
 			}
+
 			contacts[0].setDetails(first, last, nicknm, phone);
-			contactCount++;
-			oldestContactIndex = MAX_CONTACTS;
+			oldestContactIndex = MAX_CONTACTS - 1;
 		}
 	}
 
@@ -125,9 +125,9 @@ class PhoneBook
 			for (int i = 0; i < contactCount; i++)
 			{
 				std::cout << i << "     | ";
-				std::cout << std::setw(10) << std::left << contacts[i].getFirstName().substr(0,10) << "    | ";
-				std::cout << std::setw(10) << std::left << contacts[i].getLastName().substr(0,10) << "       | ";
-				std::cout << std::setw(10) << std::left << contacts[i].getNickName().substr(0,10) << "\n";
+				std::cout << std::setw(10) << std::left << contacts[i].getFirstName().substr(0, 10) << "    | ";
+				std::cout << std::setw(10) << std::left << contacts[i].getLastName().substr(0, 10) << "       | ";
+				std::cout << std::setw(10) << std::left << contacts[i].getNickName().substr(0, 10) << "\n";
 			}
 			std::cout << "\n";
 		}
@@ -168,7 +168,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 
 	PhoneBook phoneBook;
-	// atexit(leaks);
+	atexit(leaks);
 
 	std::cout << std::endl;
 	std::cout << "Welcome to your PhoneBook!" << std::endl;
@@ -186,6 +186,8 @@ int	main(int argc, char **argv)
 	phoneBook.addContact("Jane", "Smith", "Janey", "+44-20-7946-0958");
 	phoneBook.addContact("Alice", "Johnson", "Ali", "+1-303-555-6789");
 	phoneBook.addContact("Bob", "Brown", "Bobby", "+1-212-555-4321");
+	phoneBook.addContact("Gela", "Trolishvili", "TROLOLOLO", "+1-289-89-8989");
+	phoneBook.addContact("Churiko", "Gremmmery", "Chikoo", "+995-599-324-123");
 	phoneBook.displayContacts();
 	phoneBook.displaySingleContact(2);
 	return (0);
