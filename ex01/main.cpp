@@ -168,6 +168,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 
 	PhoneBook phoneBook;
+	std::string command;
 	atexit(leaks);
 
 	std::cout << std::endl;
@@ -175,20 +176,25 @@ int	main(int argc, char **argv)
 	std::cout << "You can use the following commands:" << std::endl;
 	std::cout << "ADD" << " - Add a new contact" << std::endl;
 	std::cout << "SEARCH" << " - Search for a contact" << std::endl;
-	std::cout << "EXIT" << " - Exit the application" << std::endl;
+	std::cout << "EXIT" << " - Exit the application\n" << std::endl;
 
-	phoneBook.addContact("Anamaria", "Smith", "Wonderland", "+123-456-7890");
-	phoneBook.addContact("Sasha", "Uplisashvili", "BOOO", "+995-599-32-57-75");
-	phoneBook.addContact("Tea", "Tvaradze", "Tekoo", "+995-577-76-04-01");
-	phoneBook.addContact("Kote", "Uplisashvili", "KU", "+995-599-57-75-35");
-	phoneBook.addContact("Anano", "Glonti", "BUSIKIII", "+49-155-092-2131");
-	phoneBook.addContact("John", "Doe", "Johnny", "+1-800-555-1234");
-	phoneBook.addContact("Jane", "Smith", "Janey", "+44-20-7946-0958");
-	phoneBook.addContact("Alice", "Johnson", "Ali", "+1-303-555-6789");
-	phoneBook.addContact("Bob", "Brown", "Bobby", "+1-212-555-4321");
-	phoneBook.addContact("Gela", "Trolishvili", "TROLOLOLO", "+1-289-89-8989");
-	phoneBook.addContact("Churiko", "Gremmmery", "Chikoo", "+995-599-324-123");
-	phoneBook.displayContacts();
-	phoneBook.displaySingleContact(2);
+	while(1)
+	{
+		std::cout << "Enter a Command: ";
+        std::getline(std::cin, command);
+	}
+	// phoneBook.addContact("Anamaria", "Smith", "Wonderland", "+123-456-7890");
+	// phoneBook.addContact("Sasha", "Uplisashvili", "BOOO", "+995-599-32-57-75");
+	// phoneBook.addContact("Tea", "Tvaradze", "Tekoo", "+995-577-76-04-01");
+	// phoneBook.addContact("Kote", "Uplisashvili", "KU", "+995-599-57-75-35");
+	// phoneBook.addContact("Anano", "Glonti", "BUSIKIII", "+49-155-092-2131");
+	// phoneBook.addContact("John", "Doe", "Johnny", "+1-800-555-1234");
+	// phoneBook.addContact("Jane", "Smith", "Janey", "+44-20-7946-0958");
+	// phoneBook.addContact("Alice", "Johnson", "Ali", "+1-303-555-6789");
+	// phoneBook.addContact("Bob", "Brown", "Bobby", "+1-212-555-4321");
+	// phoneBook.addContact("Gela", "Trolishvili", "TROLOLOLO", "+1-289-89-8989");
+	// phoneBook.addContact("Churiko", "Gremmmery", "Chikoo", "+995-599-324-123");
+	// phoneBook.displayContacts();
+	// phoneBook.displaySingleContact(2);
 	return (0);
 }
