@@ -1,13 +1,9 @@
-#include <cctype>
-#include <iomanip>
-#include <ios>
-#include <iostream>
+# include "Phonebook.hpp"
 
 void	leaks(void)
 {
 	system("leaks phonebook");
 }
-
 class Contact
 {
   private:
@@ -84,8 +80,8 @@ class PhoneBook
 			{
 				contacts[i].setDetails(
 					contacts[i - 1].getFirstName(),
-					contacts[i - 1].getLastName(), 
-					contacts[i - 1].getNickName(), 
+					contacts[i - 1].getLastName(),
+					contacts[i - 1].getNickName(),
 					contacts[i - 1].getPhoneNumber()
 				);
 			}
@@ -99,7 +95,7 @@ class PhoneBook
 			{
 				contacts[i].setDetails(
 					contacts[i - 1].getFirstName(),
-					contacts[i - 1].getLastName(), 
+					contacts[i - 1].getLastName(),
 					contacts[i - 1].getNickName(),
 					contacts[i - 1].getPhoneNumber()
 				);
@@ -142,8 +138,6 @@ class PhoneBook
 		else
 		{
 			std::cout << "\n";
-			// std::cout << "Index | First Name    | Last Name        | Nickname     \n";
-			// std::cout << "-------------------------------------------------------------\n";
 			for (int i = 0; i < contactCount; i++)
 			{
 				if (i == index)
@@ -162,39 +156,85 @@ class PhoneBook
 	}
 };
 
+void	handleSearch(PhoneBook &phoneBook)
+{
+	int	index;
+
+	phoneBook.displayContacts();
+	std::cout << "Enter index of contact to find: ";
+	std::cin >> index;
+	std::cin.ignore();
+	phoneBook.displaySingleContact(index);
+}
+
+void	handleAdd(PhoneBook &phoneBook)
+{
+	std::string firstName;
+	std::string lastName;
+	std::string nickName;
+	std::string phoneNumber;
+	std::cout << "First name: ";
+	std::cin >> firstName;
+	std::cout << "Last name: ";
+	std::cin >> lastName;
+	std::cout << "Nickname: ";
+	std::cin >> nickName;
+	std::cout << "Phone Number: ";
+	std::cin >> phoneNumber;
+	phoneBook.addContact(firstName, lastName, nickName, phoneNumber);
+	std::cin.ignore();
+	std::cout << "\nContact added\n\n";
+}
+
 int	main(int argc, char **argv)
 {
+	PhoneBook	phoneBook;
+
 	(void)argc;
 	(void)argv;
-
-	PhoneBook phoneBook;
 	std::string command;
-	atexit(leaks);
-
+	// int contact_index;
+	// atexit(leaks);
 	std::cout << std::endl;
 	std::cout << "Welcome to your PhoneBook!" << std::endl;
 	std::cout << "You can use the following commands:" << std::endl;
 	std::cout << "ADD" << " - Add a new contact" << std::endl;
 	std::cout << "SEARCH" << " - Search for a contact" << std::endl;
 	std::cout << "EXIT" << " - Exit the application\n" << std::endl;
-
-	while(1)
+	while (1)
 	{
 		std::cout << "Enter a Command: ";
-        std::getline(std::cin, command);
+		std::getline(std::cin, command);
+		if (command == "ADD")
+		{
+			handleAdd(phoneBook);
+		}
+		else if (command == "SEARCH")
+		{
+			handleSearch(phoneBook);
+		}
+		else if (command == "EXIT")
+		{
+			break ;
+		}
+		else
+		{
+			std::cout << "Invalid Command. Please try again.\n";
+		}
 	}
-	// phoneBook.addContact("Anamaria", "Smith", "Wonderland", "+123-456-7890");
-	// phoneBook.addContact("Sasha", "Uplisashvili", "BOOO", "+995-599-32-57-75");
-	// phoneBook.addContact("Tea", "Tvaradze", "Tekoo", "+995-577-76-04-01");
-	// phoneBook.addContact("Kote", "Uplisashvili", "KU", "+995-599-57-75-35");
-	// phoneBook.addContact("Anano", "Glonti", "BUSIKIII", "+49-155-092-2131");
-	// phoneBook.addContact("John", "Doe", "Johnny", "+1-800-555-1234");
-	// phoneBook.addContact("Jane", "Smith", "Janey", "+44-20-7946-0958");
-	// phoneBook.addContact("Alice", "Johnson", "Ali", "+1-303-555-6789");
-	// phoneBook.addContact("Bob", "Brown", "Bobby", "+1-212-555-4321");
-	// phoneBook.addContact("Gela", "Trolishvili", "TROLOLOLO", "+1-289-89-8989");
-	// phoneBook.addContact("Churiko", "Gremmmery", "Chikoo", "+995-599-324-123");
-	// phoneBook.displayContacts();
-	// phoneBook.displaySingleContact(2);
 	return (0);
 }
+
+// phoneBook.addContact("Anamaria", "Smith", "Wonderland", "+123-456-7890");
+// phoneBook.addContact("Sasha", "Uplisashvili", "BOOO","+995-599-32-57-75");
+// phoneBook.addContact("Tea", "Tvaradze", "Tekoo", "+995-577-76-04-01");
+// phoneBook.addContact("Kote", "Uplisashvili", "KU", "+995-599-57-75-35");
+// phoneBook.addContact("Anano", "Glonti", "BUSIKIII", "+49-155-092-2131");
+// phoneBook.addContact("John", "Doe", "Johnny", "+1-800-555-1234");
+// phoneBook.addContact("Jane", "Smith", "Janey", "+44-20-7946-0958");
+// phoneBook.addContact("Alice", "Johnson", "Ali", "+1-303-555-6789");
+// phoneBook.addContact("Bob", "Brown", "Bobby", "+1-212-555-4321");
+// phoneBook.addContact("Gela", "Trolishvili", "TROLOLOLO","+1-289-89-8989");
+// phoneBook.addContact("Churiko", "Gremmmery", "Chikoo","+995-599-324-123");
+// phoneBook.displayContacts();
+// phoneBook.displaySingleContact(2);
