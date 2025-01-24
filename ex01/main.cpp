@@ -128,6 +128,7 @@ class PhoneBook
 			std::cout << "\n";
 		}
 	}
+
 	void displaySingleContact(int index) const
 	{
 		if (contactCount == 0)
@@ -154,17 +155,38 @@ class PhoneBook
 			std::cout << "\n";
 		}
 	}
+
+	int getContactCount()
+	{
+		return (contactCount);
+	}
 };
 
 void	handleSearch(PhoneBook &phoneBook)
 {
 	int	index;
 
-	phoneBook.displayContacts();
-	std::cout << "Enter index of contact to find: ";
-	std::cin >> index;
-	std::cin.ignore();
-	phoneBook.displaySingleContact(index);
+	if(phoneBook.getContactCount() > 0)
+	{
+		phoneBook.displayContacts();
+		std::cout << "Enter index of contact to find: ";
+        if (std::cin >> index && index >= 0 && index <= phoneBook.getContactCount() - 1)
+        {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            phoneBook.displaySingleContact(index);
+        }
+        else
+        {
+           std::cout << "Error: Invalid index. Please enter a digit between 0 and "  << phoneBook.getContactCount() - 1 << ".\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+	}
+	else
+	{
+		std::cout << "\nPhoneBook is Empty\n\n";
+		return ;
+	}
 }
 
 void	handleAdd(PhoneBook &phoneBook)
@@ -194,7 +216,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	std::string command;
 	// int contact_index;
-	// atexit(leaks);
+	atexit(leaks);
 	std::cout << std::endl;
 	std::cout << "Welcome to your PhoneBook!" << std::endl;
 	std::cout << "You can use the following commands:" << std::endl;
