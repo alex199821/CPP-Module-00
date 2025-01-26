@@ -53,17 +53,17 @@ void PhoneBook::displayContacts() const
 	else
 	{
 		std::cout << "\n";
-		std::cout << "Index | First Name    | Last Name        | Nickname     \n";
-		std::cout << "-------------------------------------------------------------\n";
+		std::cout << BLUE << "Index | First Name    | Last Name        | Nickname     \n" << RESET;
+		std::cout << BLUE << "-------------------------------------------------------------\n" << RESET;
 		for (int i = 0; i < contactCount; i++)
 		{
-			std::cout << i << "     | ";
-			std::cout << std::setw(10) << std::left << contacts[i].getFirstName().substr(0,
-				10) << "    | ";
-			std::cout << std::setw(10) << std::left << contacts[i].getLastName().substr(0,
-				10) << "       | ";
-			std::cout << std::setw(10) << std::left << contacts[i].getNickName().substr(0,
-				10) << "\n";
+			std::cout << BLUE << i << "     | " << RESET;
+			std::cout << BLUE << std::setw(10) << std::left << contacts[i].getFirstName().substr(0,
+				10) << "    | " << RESET;
+			std::cout << BLUE << std::setw(10) << std::left << contacts[i].getLastName().substr(0,
+				10) << "       | " << RESET;
+			std::cout << BLUE << std::setw(10) << std::left << contacts[i].getNickName().substr(0,
+				10) << "\n" << RESET;
 		}
 		std::cout << "\n";
 	}
@@ -73,7 +73,7 @@ void PhoneBook::displaySingleContact(int index) const
 {
 	if (contactCount == 0)
 	{
-		std::cout << "PhoneBook is Empty\n";
+		std::cout << RED << "Error. PhoneBook is Empty\n" << RESET;
 		return ;
 	}
 	else
@@ -83,13 +83,13 @@ void PhoneBook::displaySingleContact(int index) const
 		{
 			if (i == index)
 			{
-				std::cout << "Found Contact" << std::endl;
-				std::cout << "----------------------------\n" << std::endl;
-				std::cout << "First Name: " << contacts[i].getFirstName() << std::endl;
-				std::cout << "Last Name: " << contacts[i].getLastName() << std::endl;
-				std::cout << "Nick Name: " << contacts[i].getNickName() << std::endl;
-				std::cout << "Phone Number: " << contacts[i].getPhoneNumber() << std::endl;
-				std::cout << "\n----------------------------" << std::endl;
+				std::cout << GREEN << "Found Contact" << RESET << std::endl;
+				std::cout << BLUE << "----------------------------\n" << RESET << std::endl;
+				std::cout << BLUE << "First Name: " << contacts[i].getFirstName() << RESET << std::endl;
+				std::cout << BLUE << "Last Name: " << contacts[i].getLastName() << RESET << std::endl;
+				std::cout << BLUE << "Nick Name: " << contacts[i].getNickName() << RESET << std::endl;
+				std::cout << BLUE << "Phone Number: " << contacts[i].getPhoneNumber() << RESET << std::endl;
+				std::cout << BLUE << "\n----------------------------" << RESET << std::endl;
 			}
 		}
 		std::cout << "\n";
