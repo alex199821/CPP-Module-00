@@ -1,8 +1,8 @@
-NAME = phonebook
+NAME = PhoneBook
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98 #-fsanitize=address
 
-SRCS = main.cpp contact.cpp phonebook.cpp
+SRCS = main.cpp Contact.cpp PhoneBook.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)

@@ -1,4 +1,4 @@
-# include "Phonebook.hpp"
+# include "PhoneBook.hpp"
 
 // void	leaks(void)
 // {
@@ -53,13 +53,12 @@ void	handleAdd(PhoneBook &phoneBook)
 
 int	main(int argc, char **argv)
 {
+	// atexit(leaks);
 	PhoneBook	phoneBook;
 
 	(void)argc;
 	(void)argv;
 	std::string command;
-	// int contact_index;
-	// atexit(leaks);
 	std::cout << std::endl;
 	std::cout << GREEN << "Welcome to your PhoneBook!" << RESET << std::endl;
 	std::cout << YELLOW << "You can use the following commands:" << RESET << std::endl;

@@ -15,8 +15,9 @@ int	main(int argc, char **argv)
 			{
 				argv[i][j] = std::toupper(argv[i][j]);
 			}
-			std::cout << argv[i] << std::endl;
+			std::cout << argv[i];
 		}
 	}
+	std::cout << std::endl;
 	return (0);
 }

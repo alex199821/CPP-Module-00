@@ -1,4 +1,4 @@
-#include "Phonebook.hpp"
+#include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook() : contactCount(0), oldestContactIndex(0)
 {
@@ -17,12 +17,9 @@ void PhoneBook::addContact(const std::string &first, const std::string &last,
 	{
 		for (int i = contactCount; i > 0; i--)
 		{
-			contacts[i].setDetails(
-                contacts[i - 1].getFirstName(),
-                contacts[i - 1].getLastName(),
-                contacts[i - 1].getNickName(),
-                contacts[i - 1].getPhoneNumber()
-            );
+			contacts[i].setDetails(contacts[i - 1].getFirstName(), contacts[i
+				- 1].getLastName(), contacts[i - 1].getNickName(), contacts[i
+				- 1].getPhoneNumber());
 		}
 		contacts[0].setDetails(first, last, nicknm, phone);
 		contactCount++;
@@ -31,12 +28,9 @@ void PhoneBook::addContact(const std::string &first, const std::string &last,
 	{
 		for (int i = MAX_CONTACTS - 1; i > 0; i--)
 		{
-			contacts[i].setDetails(
-                contacts[i - 1].getFirstName(),
-                contacts[i - 1].getLastName(),
-                contacts[i - 1].getNickName(),
-                contacts[i - 1].getPhoneNumber()
-            );
+			contacts[i].setDetails(contacts[i - 1].getFirstName(), contacts[i
+				- 1].getLastName(), contacts[i - 1].getNickName(), contacts[i
+				- 1].getPhoneNumber());
 		}
 		contacts[0].setDetails(first, last, nicknm, phone);
 		oldestContactIndex = MAX_CONTACTS - 1;
@@ -53,17 +47,31 @@ void PhoneBook::displayContacts() const
 	else
 	{
 		std::cout << "\n";
-		std::cout << BLUE << "Index | First Name    | Last Name        | Nickname     \n" << RESET;
-		std::cout << BLUE << "-------------------------------------------------------------\n" << RESET;
+		std::cout << BLUE << "     Index|First Name| Last Name|  Nickname\n" << RESET;
+		std::cout << BLUE << "-------------------------------------------\n" << RESET;
 		for (int i = 0; i < contactCount; i++)
 		{
-			std::cout << BLUE << i << "     | " << RESET;
-			std::cout << BLUE << std::setw(10) << std::left << contacts[i].getFirstName().substr(0,
-				10) << "    | " << RESET;
-			std::cout << BLUE << std::setw(10) << std::left << contacts[i].getLastName().substr(0,
-				10) << "       | " << RESET;
-			std::cout << BLUE << std::setw(10) << std::left << contacts[i].getNickName().substr(0,
-				10) << "\n" << RESET;
+			std::cout << BLUE << std::setw(10) << std::right << i << "|" << RESET;
+			std::string first_name = contacts[i].getFirstName();
+			if (first_name.length() > 10)
+			{
+				first_name = first_name.substr(0, 9) + ".";
+			}
+			std::cout << BLUE << std::setw(10) << std::right << first_name << "|" << RESET;
+
+			std::string last_name = contacts[i].getLastName();
+			if (last_name.length() > 10)
+			{
+				last_name = last_name.substr(0, 9) + ".";
+			}
+			std::cout << BLUE << std::setw(10) << std::right << last_name << "|" << RESET;
+
+			std::string nickname = contacts[i].getNickName();
+			if (nickname.length() > 10)
+			{
+				nickname = nickname.substr(0, 9) + ".";
+			}
+			std::cout << BLUE << std::setw(10) << std::right << nickname << "\n" << RESET;
 		}
 		std::cout << "\n";
 	}
