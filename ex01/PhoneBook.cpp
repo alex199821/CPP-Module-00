@@ -5,11 +5,12 @@ PhoneBook::PhoneBook() : contactCount(0), oldestContactIndex(0)
 }
 
 void PhoneBook::addContact(const std::string &first, const std::string &last,
-	const std::string &nicknm, const std::string &phone)
+	const std::string &nicknm, const std::string &phone,
+	const std::string &secret)
 {
 	if (contactCount == 0)
 	{
-		contacts[0].setDetails(first, last, nicknm, phone);
+		contacts[0].setDetails(first, last, nicknm, phone, secret);
 		contactCount++;
 		oldestContactIndex++;
 	}
@@ -19,9 +20,9 @@ void PhoneBook::addContact(const std::string &first, const std::string &last,
 		{
 			contacts[i].setDetails(contacts[i - 1].getFirstName(), contacts[i
 				- 1].getLastName(), contacts[i - 1].getNickName(), contacts[i
-				- 1].getPhoneNumber());
+				- 1].getPhoneNumber(), contacts[i - 1].getDarkestSecret());
 		}
-		contacts[0].setDetails(first, last, nicknm, phone);
+		contacts[0].setDetails(first, last, nicknm, phone, secret);
 		contactCount++;
 	}
 	else if (contactCount >= MAX_CONTACTS)
@@ -30,9 +31,9 @@ void PhoneBook::addContact(const std::string &first, const std::string &last,
 		{
 			contacts[i].setDetails(contacts[i - 1].getFirstName(), contacts[i
 				- 1].getLastName(), contacts[i - 1].getNickName(), contacts[i
-				- 1].getPhoneNumber());
+				- 1].getPhoneNumber(), contacts[i - 1].getDarkestSecret());
 		}
-		contacts[0].setDetails(first, last, nicknm, phone);
+		contacts[0].setDetails(first, last, nicknm, phone, secret);
 		oldestContactIndex = MAX_CONTACTS - 1;
 	}
 }
@@ -97,6 +98,7 @@ void PhoneBook::displaySingleContact(int index) const
 				std::cout << BLUE << "Last Name: " << contacts[i].getLastName() << RESET << std::endl;
 				std::cout << BLUE << "Nick Name: " << contacts[i].getNickName() << RESET << std::endl;
 				std::cout << BLUE << "Phone Number: " << contacts[i].getPhoneNumber() << RESET << std::endl;
+				std::cout << BLUE << "Darkest Secret: " << contacts[i].getDarkestSecret() << RESET << std::endl;
 				std::cout << BLUE << "\n----------------------------" << RESET << std::endl;
 			}
 		}

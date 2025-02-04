@@ -1,18 +1,21 @@
 #include "PhoneBook.hpp"
 
 Contact::Contact(const std::string &first, const std::string &last,
-                 const std::string &nicknm, const std::string &phone)
-    : firstName(first), lastName(last), nickName(nicknm), phoneNumber(phone)
+	const std::string &nicknm, const std::string &phone,
+	const std::string &secret) : firstName(first), lastName(last),
+	nickName(nicknm), phoneNumber(phone), darkestSecret(secret)
 {
 }
 
 void Contact::setDetails(const std::string &first, const std::string &last,
-	const std::string &nicknm, const std::string &phone)
+	const std::string &nicknm, const std::string &phone,
+	const std::string &secret)
 {
 	firstName = first;
 	lastName = last;
 	nickName = nicknm;
 	phoneNumber = phone;
+	darkestSecret = secret;
 }
 
 void Contact::display() const
@@ -38,4 +41,9 @@ std::string Contact::getNickName() const
 std::string Contact::getPhoneNumber() const
 {
 	return (phoneNumber);
+}
+
+std::string Contact::getDarkestSecret() const
+{
+	return (darkestSecret);
 }

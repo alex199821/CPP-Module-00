@@ -15,14 +15,21 @@ void	handleSearch(PhoneBook &phoneBook)
 		std::cout << "Enter index of contact to find: ";
 		if (std::cin.peek() == '\n')
 		{
-			std::cout << RED << "\nError: Input cannot be empty. Please enter a valid index.\n\n" << RESET;
+			std::cout << RED << "Error: Input cannot be empty. Please enter a valid index.\n" << RESET;
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			return;
 		}
 		if (!(std::cin >> index))
 		{
-			std::cout << std::endl;
-			exit(0) ;
+    		if (std::cin.eof())
+			{
+				std::cout << std::endl;
+				exit(0);
+			}
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << RED << "Error: Please enter a valid digit.\n" << RESET;
+			return;
 		}
 		if (index >= 0 && index <= phoneBook.getContactCount() - 1)
 		{
@@ -31,8 +38,8 @@ void	handleSearch(PhoneBook &phoneBook)
 		}
 		else
 		{
-			std::cout << RED  <<  "\nError: Please enter a digit between 0 and " << phoneBook.getContactCount()
-				- 1 << ".\n\n" << RESET;
+			std::cout << RED  <<  "Error: Please enter a digit between 0 and " << phoneBook.getContactCount()
+				- 1 << ".\n" << RESET;
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
@@ -61,7 +68,7 @@ bool getNonEmptyInput(const std::string& prompt, std::string& output) {
 }
 
 void handleAdd(PhoneBook &phoneBook) {
-    std::string firstName, lastName, nickName, phoneNumber;
+    std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
 
     if (!getNonEmptyInput("First name: ", firstName)) {
         exit(0);
@@ -75,8 +82,11 @@ void handleAdd(PhoneBook &phoneBook) {
     if (!getNonEmptyInput("Phone Number: ", phoneNumber)) {
         exit(0);
     }
+	if (!getNonEmptyInput("Darkest Secret: ", darkestSecret)) {
+        exit(0);
+    }
 
-    phoneBook.addContact(firstName, lastName, nickName, phoneNumber);
+    phoneBook.addContact(firstName, lastName, nickName, phoneNumber, darkestSecret);
     std::cout << GREEN << "Contact added\n" << RESET;
 }
 
